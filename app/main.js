@@ -30,7 +30,9 @@ app.on('ready', function() {
     // and load the index.html of the app.
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-	mainWindow.openDevTools();  
+    if(undefined !== process.env.NODE_ENV && 'development' === process.env.NODE_ENV) {
+        mainWindow.openDevTools();
+    }
   
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
