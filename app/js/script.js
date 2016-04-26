@@ -1,5 +1,12 @@
 $(function(){
-	
+	const shell = require('shell');
+	const fs = require('fs');
+	const csv = require('csv-parser');
+	const remote = require('remote');
+	const dialog = require('electron').remote.dialog;
+	const clipboard = require('clipboard-js');
+	const ipc = require('electron').ipcRenderer;
+
 	var appController = function() {
 		this.init();
 	};
@@ -7,14 +14,6 @@ $(function(){
 	appController.prototype = {
 		init: function() {
 				this.$el = $('body');
-				
-			    this.shell = require('shell');
-				this.fs = require('fs');
-				this.csv = require('csv-parser');
-				this.remote = require('remote'); 
-				this.dialog = require('electron').remote.dialog;
-				this.clipboard = require('clipboard-js');
-				this.ipc = require('electron').ipcRenderer;
 				
 				this.geoData = null;
 				this.map = null;
@@ -35,11 +34,11 @@ $(function(){
 			});
 			
 			this.$el.on('click', '#clipboard-html-code', function() {
-				that.clipboard.copy($('#raw-html-code').val());
+				clipboard.copy($('#raw-html-code').val());
 			});
 
 			this.$el.on('click', '.close-main-window', function() {
-				that.ipc.send('close-main-window')
+				ipc.send('close-main-window')
 			});
 						
 		},
@@ -47,10 +46,10 @@ $(function(){
 		openFile: function() {
 			var that = this;
 			
-			this.dialog.showOpenDialog(function (fileNames) {
+			dialog.showOpenDialog(function (fileNames) {
 				if (fileNames === undefined) return;
 				var fileName = fileNames[0];
-				console.log(fileName);
+				// console.log(fileName);
 				that.parseCSV(fileName);	
 			});
 		},
@@ -58,7 +57,7 @@ $(function(){
 		saveFile: function() {
 			var that = this;
 			
-			this.dialog.showSaveDialog(function (fileName) {
+			dialog.showSaveDialog(function (fileName) {
 				if (fileName === undefined) return;
 				console.log(fileName);
 				fs.writeFile(fileName, 'Hello World!', function (err) {
@@ -73,7 +72,7 @@ $(function(){
 			
 			this.geoData = new Array();
 			
-			var stream = this.csv({
+			var stream = csv({
 				raw: false,     // do not decode to utf-8 strings 
 				separator: ';', // specify optional cell separator 
 				quote: '"',     // specify optional quote character 
@@ -81,13 +80,13 @@ $(function(){
 				newline: '\n',  // specify a newline character
 			});
 
-			this.fs.createReadStream(fileName)
+			fs.createReadStream(fileName)
 				.pipe(stream)
 				.on('data', function(data) {
 					that.geoData.push(data);
 				})
 				.on('end', function() {
-					console.log("CSV parsed!");
+					// console.log("CSV parsed!");
 					that.displayData();
 				});
 			
