@@ -16,9 +16,7 @@ $(function(){
 				this.$el = $('body');
 				
 				this.geoData = null;
-				this.map = null;
-				this.markers = null;
-				
+
 				this.events();
 		},
 		
@@ -96,30 +94,15 @@ $(function(){
 			var that = this;
 			var marker;
 			
-			this.markers = new Array();
 			
 			$('#geoData-table').empty();
-			$('#googleMap').empty();
 			$('#geoData-table').append('<thead><tr><td>ID</td><td>NAME</td><td>LAT</td><td>LNG</td></tr></thead>');
-			
-			var mapProp = {
-				center:new google.maps.LatLng(51.508742,-0.120850),
-				zoom:5,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-			this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
 			$.each(this.geoData, function(index, row) {
 				$('#geoData-table').append('<tr><td>'+row.id+'</td>'+'<td>'+row.name+'</td>'+'<td>'+row.lat+'</td>'+'<td>'+row.lng+'</td></tr>');
-				myLatlng = new google.maps.LatLng(row.lat,row.lng);
-
-				marker = new google.maps.Marker({
-					position: myLatlng,
-					title: row.name,
-				});
-				that.markers.push(marker);
-				marker.setMap(that.map);
 			});
+			
+			var customMap = new map(this.geoData);
 			
 			$('#raw-html-code').append('<h2>HTML code</h2><br/>' +
 				'&lt;script src="http://maps.googleapis.com/maps/api/js"&gt;&lt;/script&gt;'+
