@@ -14,7 +14,7 @@ $(function(){
 				this.remote = require('remote'); 
 				this.dialog = require('electron').remote.dialog;
 				this.clipboard = require('clipboard-js');
-				this.ipc = require('ipc');
+				this.ipc = require('electron').ipcRenderer;
 				
 				this.geoData = null;
 				this.map = null;
