@@ -1,11 +1,11 @@
 $(function(){
-	const shell = require('shell');
+	const electron = require('electron');
 	const fs = require('fs');
 	const csv = require('csv-parser');
 	const remote = require('remote');
-	const dialog = require('electron').remote.dialog;
-	const clipboard = require('clipboard-js');
-	const ipc = require('electron').ipcRenderer;
+	const dialog = electron.remote.dialog;
+	const clipboard = electron.clipboard;
+	const ipc = electron.ipcRenderer;
 
 	var appController = function() {
 		this.init();
@@ -34,7 +34,7 @@ $(function(){
 			});
 			
 			this.$el.on('click', '#clipboard-html-code', function() {
-				clipboard.copy($('#raw-html-code').val());
+				clipboard.writeText($('#raw-html-code').val());
 			});
 
 			this.$el.on('click', '.close-main-window', function() {

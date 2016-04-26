@@ -19,21 +19,10 @@
     "locator",
     "store locator"
   ],
-  "devDependencies": {
-    "electron-builder": "^3.11.0",
-    "electron-packager": "^7.0.1",
-    "electron-prebuilt": "^0.37.5"
-  },
-  "scripts": {
-    "postinstall": "install-app-deps",
-    "start": "electron ./app",
-    "dev": "NODE_ENV='development' npm run start",
-    "pack": "electron-packager . --platform=all --arch=all --out=dist --overwrite --asar",
-    "build": "build \"dist/MapBuilder-linux-x64\" --platform=linux --arch=x64"
-  },
-  "build": {
-    "app-bundle-id": "7",
-    "app-category-type": "",
-    "iconUrl": ""
+  "dependencies": {
+    "csv-parser": "^1.9.3",
+    "dialog": "~0.1.8",
+    "fs": "0.0.2",
+    "pretty-bytes": "^2.0.1"
   }
 }
