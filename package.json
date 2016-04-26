@@ -1,0 +1,37 @@
+{
+  "name": "map-builder",
+  "productName": "MapBuilder",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "App to build google map from csv data and export code to embed the map anywhere. It's developped using electronJs (Atom Shell) ",
+  "license": "MIT",
+  "repository": "nicolastorre/map-builder",
+  "author": {
+    "name": "Nicolas Torre",
+    "email": "nico.torre.06@gmail.com",
+    "url": ""
+  },
+  "keywords": [
+    "electron-app",
+    "electron",
+    "google map",
+    "map builder",
+    "locator",
+    "store locator"
+  ],
+  "dependencies": {
+    "clipboard-js": "^0.2.0",
+    "csv-parser": "^1.9.3",
+    "dialog": "~0.1.8",
+    "fs": "0.0.2",
+    "pretty-bytes": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.37.5"
+  },
+  "scripts": {
+    "start": "electron main.js",
+    "build": "electron-packager . --platform=all --arch=all --out=dist --overwrite --asar"
+  }
+}

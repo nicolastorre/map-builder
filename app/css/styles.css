@@ -1,0 +1,20 @@
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #282C34;
+  color: #333333;
+  font-weight: 400;
+  font-size: 15px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main {
+    padding-top: 70px;
+}
+
